@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login & Add Member</title>
+</head>
+<body>
+
+<h2>Admin Login</h2>
+
+<input type="text" id="username" placeholder="Username"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<hr>
+
+<h2>Add Member</h2>
+
+<input type="text" id="name" placeholder="Enter Member Name">
+<button onclick="addMember()">Add Member</button>
+
+<script>
+// LOGIN
+function login() {
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if(user === "admin" && pass === "1234") {
+    localStorage.setItem("isAdmin", "true");
+    alert("Login Successful");
+    window.location.href = "admin.html";
+  } else {
+    alert("Wrong Username or Password");
+  }
+}
+
+// ADD MEMBER
+function addMember() {
+  let name = document.getElementById("name").value;
+
+  if(name === "") {
+    alert("Enter name first");
+    return;
+  }
+
+  let members = JSON.parse(localStorage.getItem("members")) || [];
+
+  members.push(name);
+
+  localStorage.setItem("members", JSON.stringify(members));
+
+  alert("Member Added!");
+}
+</script>
+
+</body>
+</html>
